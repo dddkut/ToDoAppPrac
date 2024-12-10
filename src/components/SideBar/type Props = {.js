@@ -1,9 +1,3 @@
-import Head from "next/head";
-import { ReactNode, useState } from "react";
-import styles from "./styles.module.scss";
-import { SideBar } from "../SideBar";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
 type Props = {
   children: ReactNode;
 };
@@ -12,6 +6,7 @@ export const Layout = ({ children }: Props) => {
   const [isSideBar, setIsSideBar] = useState(false);
 
   const swichSideBarOpen = () => {
+    console.log(isSideBar);
     setIsSideBar(!isSideBar);
   };
 
@@ -46,3 +41,19 @@ export const Layout = ({ children }: Props) => {
     </div>
   );
 };
+
+
+type Props = { isSideBar: boolean };
+
+export const SideBar = React.memo(({ isSideBar }: Props) => {
+  console.log(isSideBar);
+  return (
+    <nav className={styles.sideBarWrapper}>
+      <div className={styles.sideBarContent}>
+        <h4>SideBar</h4>
+      </div>
+    </nav>
+  );
+});
+
+でボタンクリック時に console.log(isSideBar);が2回実行されるのはなぜ
