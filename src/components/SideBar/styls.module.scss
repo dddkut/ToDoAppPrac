@@ -1,0 +1,36 @@
+.sideBarWrapper {
+  height: 100vh;
+  width: 150px;
+  left: -150px;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(65, 65, 65);
+  transition: 0.5s;
+
+  .sideBarContent {
+    padding: 15px 15px 15px 15px;
+  }
+
+  .sideBarContent:hover {
+    background-color: gray;
+  }
+
+  &.isOpen {
+    left: 0px;
+    .hrLine {
+      animation: fade-in 1s forwards;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

@@ -1,5 +1,21 @@
 .header {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(41, 40, 40);
+  height: 50px;
+  background-color: rgb(40, 40, 40);
+  // padding: 0 3px 0 3px;
+  .centerWrapper {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    // position: relative;
+    justify-content: center;
+  }
+  .sideBarButton {
+    height: 50px;
+    // left: 0;
+    position: absolute;
+    margin-left: 10px;
+  }
+  .sideBarButton:hover {
+    cursor: pointer;
+  }
 }
