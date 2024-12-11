@@ -1,21 +1,23 @@
 .header {
-  height: 50px;
+  height: 8vh;
   background-color: rgb(40, 40, 40);
-  // padding: 0 3px 0 3px;
+  display: flex;
   .centerWrapper {
+    justify-content: center;
+    flex: 0.95;
     align-items: center;
     display: flex;
     height: 100%;
-    // position: relative;
-    justify-content: center;
   }
-  .sideBarButton {
-    height: 50px;
-    // left: 0;
-    position: absolute;
-    margin-left: 10px;
-  }
-  .sideBarButton:hover {
-    cursor: pointer;
+  .iconWrapper {
+    width: 30px;
+    flex: 0.05;
+    margin: 0 10px 0 10px;
+    .sideBarButton {
+      height: 100%;
+    }
+    .sideBarButton:hover {
+      cursor: pointer;
+    }
   }
 }

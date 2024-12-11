@@ -23,19 +23,16 @@ export const Layout = ({ children }: Props) => {
       </Head>
       <>
         <header className={styles.header}>
-          <MenuOutlinedIcon
-            fontSize="large"
-            className={styles.sideBarButton}
-            onClick={() => void swichSideBarOpen()}
-          />
+          <div className={styles.iconWrapper}>
+            <MenuOutlinedIcon
+              fontSize="large"
+              className={styles.sideBarButton}
+              onClick={() => void swichSideBarOpen()}
+            />
+          </div>
           <div className={styles.centerWrapper}>
             <h1>PRACTICE</h1>
-            <img
-              src="/images/lizardIcon.svg"
-              width={35}
-              height={35}
-              //className={styles.image}
-            />
+            <img src="/images/lizardIcon.svg" width={35} height={35} />
           </div>
         </header>
       </>

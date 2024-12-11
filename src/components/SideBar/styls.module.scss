@@ -1,5 +1,5 @@
 .sideBarWrapper {
-  height: 100vh;
+  height: 92vh;
   width: 150px;
   left: -150px;
   position: absolute;
@@ -8,11 +8,11 @@
   background-color: rgb(65, 65, 65);
   transition: 0.5s;
 
-  .sideBarContent {
+  .sideBarItem {
     padding: 15px 15px 15px 15px;
   }
 
-  .sideBarContent:hover {
+  .sideBarItem:hover {
     background-color: gray;
   }
 
