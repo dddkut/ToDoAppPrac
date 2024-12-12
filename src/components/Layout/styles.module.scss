@@ -1,23 +1,27 @@
+$layOutHeight: 8vh;
+
 .header {
-  height: 8vh;
+  height: $layOutHeight;
   background-color: rgb(40, 40, 40);
   display: flex;
-  .centerWrapper {
-    justify-content: center;
-    flex: 0.95;
-    align-items: center;
+  .buttonWrapper {
+    min-width: 30px;
+    padding: 0 10px 0 10px;
     display: flex;
-    height: 100%;
-  }
-  .iconWrapper {
-    width: 30px;
-    flex: 0.05;
-    margin: 0 10px 0 10px;
-    .sideBarButton {
-      height: 100%;
-    }
+    align-items: center;
     .sideBarButton:hover {
       cursor: pointer;
     }
   }
+  .titleWrapper {
+    flex: 0.95;
+    align-items: center;
+    display: flex;
+    // height: 100%;
+    padding: 0 10px 0 10px;
+  }
+}
+
+.mainContent {
+  height: 92vh;
 }

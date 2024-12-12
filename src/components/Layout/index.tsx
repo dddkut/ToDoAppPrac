@@ -23,22 +23,28 @@ export const Layout = ({ children }: Props) => {
       </Head>
       <>
         <header className={styles.header}>
-          <div className={styles.iconWrapper}>
+          <div className={styles.buttonWrapper}>
             <MenuOutlinedIcon
               fontSize="large"
               className={styles.sideBarButton}
               onClick={() => void swichSideBarOpen()}
             />
           </div>
-          <div className={styles.centerWrapper}>
-            <h1>PRACTICE</h1>
+          <div className={styles.titleWrapper}>
             <img src="/images/lizardIcon.svg" width={35} height={35} />
+            <h1>PRACTICE</h1>
           </div>
         </header>
       </>
       <main className={styles.main}>
         <SideBar isSideBar={isSideBar} />
-        {children}
+        <div
+          className={`${styles.mainContent} ${
+            isSideBar ? styles.sideBarOpen : ""
+          }`}
+        >
+          {children}
+        </div>
       </main>
     </div>
   );
