@@ -1,1 +1,1 @@
-export type TaskStatus = "Not Started" | "In Progress" | "Done";
+export type TaskStatus = "Not Started" | "In Progress" | "Finished";
