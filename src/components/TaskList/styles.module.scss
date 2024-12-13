@@ -1,0 +1,30 @@
+//TODO:フォントなど
+
+.taskContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  height: 90%;
+  margin: 30px 20px 30px 20px;
+  background-color: rgb(120, 120, 120);
+  border-radius: 5px;
+
+  .status {
+    font-size: large;
+    top: 0;
+    font-weight: bold;
+    padding: 30px 50px 20px 50px;
+    border-bottom: 2px solid rgb(75, 75, 75);
+  }
+
+  .task {
+    list-style: none;
+    padding: 15px 50px 10px 50px;
+    border-radius: 5px;
+  }
+  .task:hover {
+    cursor: pointer;
+    background-color: darkgray;
+  }
+}

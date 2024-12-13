@@ -2,8 +2,8 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  .contentsWrapper {
-    display: flex;
-    flex-direction: row;
+  .listContents {
+    height: 100%;
+    justify-self: center;
   }
 }
