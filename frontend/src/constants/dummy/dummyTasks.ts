@@ -27,13 +27,13 @@ export const dummyTasks: Task[] = [
   },
   {
     id: "5",
-    title: "DummyTask4",
+    title: "DummyTask5",
     status: "Finished",
     description: "A dummy task for checking display",
   },
   {
     id: "6",
-    title: "DummyTask4",
+    title: "DummyTask6",
     status: "Not Started",
     description: "A dummy task for checking display",
   },
