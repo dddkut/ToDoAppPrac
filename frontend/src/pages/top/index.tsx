@@ -19,21 +19,16 @@ export default function Top() {
   return (
     <Layout>
       <div className={styles.container}>
-        {/* <div className={styles.contentsWrapper}> */}
         <article className={styles.listContents}>
-          {/* <span className={styles.status}> {taskStatus.notStarted}</span> */}
           <TaskList status={taskStatus.notStarted} tasks={notStartedTasks} />
         </article>
         <article className={styles.listContents}>
-          {/* <span className={styles.status}> {taskStatus.inProgress}</span> */}
           <TaskList status={taskStatus.inProgress} tasks={inProgressTasks} />
         </article>
         <article className={styles.listContents}>
-          {/* <span className={styles.status}> {taskStatus.finished}</span> */}
           <TaskList status={taskStatus.finished} tasks={finishedTasks} />
         </article>
       </div>
-      {/* </div> */}
     </Layout>
   );
 }
