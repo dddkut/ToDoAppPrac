@@ -1,6 +1,7 @@
-import { Priority } from "./priority";
-import { TaskStatus } from "./taskStatus";
-export type Task = {
+import { TaskStatus } from 'src/types/taskStatus';
+import { Priority } from 'src/types/priority';
+
+export class Task {
   id: string;
   title: string;
   status: TaskStatus;
@@ -9,4 +10,4 @@ export type Task = {
   inCharge?: string; //TODO: 担当者(メンバー)の型を考える
   // category?: string; //TODO: カテゴリーの型を考える
   priority?: Priority;
-};
+}
