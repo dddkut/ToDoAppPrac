@@ -5,7 +5,7 @@ import { FirebaseService } from '../firebase/firebase.service';
 export class AuthService {
   constructor(private readonly firebaseService: FirebaseService) {}
 
-  // トークンの検証
+  // verify the token
   async verifyToken(token: string): Promise<any> {
     try {
       const decodedToken = await this.firebaseService
