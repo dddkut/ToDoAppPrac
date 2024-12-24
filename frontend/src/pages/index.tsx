@@ -10,9 +10,8 @@ export default function Home() {
   // }, []);
 
   const logInWithGoogle = () => {
-    const loginResult = signInWithPopup(auth, provider).then((result) => {
-      console.log(result);
-    });
+    const loginResult = signInWithPopup(auth, provider);
+    console.log(loginResult);
   };
 
   return (
