@@ -5,10 +5,12 @@ import { FirebaseModule } from './firebase/firebase.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
+import { TaskController } from './task/task.controller';
+import { TaskService } from './task/task.service';
 
 @Module({
   imports: [FirebaseModule, AuthModule, TaskModule],
-  controllers: [AppController, AuthController],
-  providers: [AppService],
+  controllers: [AppController, AuthController, TaskController],
+  providers: [AppService, TaskService],
 })
 export class AppModule {}

@@ -1,10 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import * as dotenv from 'dotenv';
 import * as path from 'path';
-
-// loading .env
-dotenv.config();
 
 @Injectable()
 export class FirebaseService implements OnModuleInit {
@@ -12,6 +8,7 @@ export class FirebaseService implements OnModuleInit {
 
   onModuleInit() {
     //TODO: 環境変数の読み込みはfirebase functions用の記述に変更する
+    //TODO:serviceAccountRelativePathの有無で環境見分けるでもいいかも
     const serviceAccountRelativePath =
       process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
@@ -27,20 +24,24 @@ export class FirebaseService implements OnModuleInit {
       serviceAccountRelativePath,
     );
 
-    this.app = admin.initializeApp({
-      credential: admin.credential.cert(require(serviceAccountPath)),
-    });
-
-    console.log('Firebase Admin initialized');
+    try {
+      this.app = admin.initializeApp({
+        credential: admin.credential.cert(require(serviceAccountPath)),
+      });
+      console.log('Firebase Admin initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize Firebase Admin:', error.message);
+      throw error;
+    }
   }
 
   // Firebase Authentication
-  public getAuth(): admin.auth.Auth {
+  public async getAuth(): Promise<admin.auth.Auth> {
     return this.app.auth();
   }
 
   // Firestore
-  public getFirestore(): admin.firestore.Firestore {
+  public async getFirestore(): Promise<admin.firestore.Firestore> {
     return this.app.firestore();
   }
 }
