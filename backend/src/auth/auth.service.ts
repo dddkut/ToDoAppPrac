@@ -8,9 +8,8 @@ export class AuthService {
   // verify the token
   async verifyToken(token: string): Promise<any> {
     try {
-      const decodedToken = await this.firebaseService
-        .getAuth()
-        .verifyIdToken(token);
+      const auth = await this.firebaseService.getAuth();
+      const decodedToken = await auth.verifyIdToken(token);
       return decodedToken; // returning user information
     } catch (error) {
       throw new UnauthorizedException('Invalid or expired token');

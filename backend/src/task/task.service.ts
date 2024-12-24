@@ -3,12 +3,16 @@ import { CreateTaskDto, UpdateTaskDto } from 'src/dto/task.dto';
 import { Task } from 'src/entity/task.entity';
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { v4 as uuid } from 'uuid';
+import * as admin from 'firebase-admin';
 
 @Injectable()
 export class TaskService {
   constructor(private readonly firebaseService: FirebaseService) {}
+  private db: admin.firestore.Firestore;
 
-  private readonly db = this.firebaseService.getFirestore();
+  async onModuleInit() {
+    this.db = await this.firebaseService.getFirestore();
+  }
 
   // get task list for a user
   async getUserTasks(userId: string): Promise<Task[]> {
