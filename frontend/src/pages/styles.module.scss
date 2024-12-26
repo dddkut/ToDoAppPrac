@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .loginText {
+    margin-bottom: 25px;
+  }
+  .loginButton {
+    margin-bottom: 25px;
+    padding: 8px 5px 8px 5px;
+    background-color: rgb(129, 24, 129);
+    border: none;
+    border-radius: 5px;
+  }
+
+  .loginButton:hover {
+    background-color: rgb(126, 59, 126);
+    cursor: pointer;
+  }
+}
