@@ -1,23 +1,31 @@
-// import { useRouter } from "next/router";
-// import { useEffect } from "react";
-import { auth, provider, signInWithPopup, signOut } from "../utils/firebase";
+import { useRouter } from "next/router";
+// import { useState } from "react";
+import { auth, provider, signInWithPopup } from "../utils/firebase";
+// import { User } from "firebase/auth";
+import styles from "./styles.module.scss";
 
 export default function Home() {
-  // const router = useRouter();
+  const router = useRouter();
+  // const [user, setUser] = useState<User>(); //TODO: reduxで管理する
 
-  // useEffect(() => {
-  //   void router.replace("/top"); //TODO: Create a login screen.
-  // }, []);
-
-  const logInWithGoogle = () => {
-    const loginResult = signInWithPopup(auth, provider);
-    console.log(loginResult);
+  const logInWithGoogle = async () => {
+    try {
+      const loginResult = await signInWithPopup(auth, provider);
+      const idToken = await loginResult.user.getIdToken();
+      // setUser(loginResult.user);　//TODO: reduxで管理する
+      localStorage.setItem("token", idToken);
+      console.log("logged in successfully");
+      // redirect to top screen
+      void router.replace("/top");
+    } catch (error) {}
   };
 
   return (
-    <div>
-      <p>ログイン</p>
-      <button onClick={logInWithGoogle}>ログイン</button>
+    <div className={styles.container}>
+      <p className={styles.loginText}>Sign In to Start</p>
+      <button className={styles.loginButton} onClick={logInWithGoogle}>
+        Sign In
+      </button>
     </div>
   );
 }
