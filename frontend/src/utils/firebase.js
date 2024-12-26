@@ -6,6 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 
+//TODO: 値は環境変数に入れる？
 const firebaseConfig = {
   apiKey: "AIzaSyCcNvtbrWH-FZghmyDtordXbM_5d0vyeoM",
   authDomain: "todo-portfolio-239f6.firebaseapp.com",
