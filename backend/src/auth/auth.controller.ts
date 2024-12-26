@@ -9,6 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
+//not used
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

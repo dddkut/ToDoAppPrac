@@ -18,7 +18,7 @@ export class FirebaseService implements OnModuleInit {
       );
     }
 
-    // resolving absolute path using __dirname
+    // resolving relative path using __dirname
     const serviceAccountPath = path.resolve(
       __dirname,
       serviceAccountRelativePath,

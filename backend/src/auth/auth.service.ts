@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { FirebaseService } from '../firebase/firebase.service';
 
+// called from auth.guard.ts
 @Injectable()
 export class AuthService {
   constructor(private readonly firebaseService: FirebaseService) {}
