@@ -4,6 +4,7 @@ $layOutHeight: 8vh;
   height: $layOutHeight;
   background-color: rgb(40, 40, 40);
   display: flex;
+  justify-content: space-between;
   .sideBarButtonWrapper {
     min-width: 30px;
     padding: 0 10px 0 10px;
@@ -14,16 +15,14 @@ $layOutHeight: 8vh;
     }
   }
   .titleWrapper {
-    flex: 0.95;
     align-items: center;
     display: flex;
     padding: 0 10px 0 10px;
   }
   .logOutWrapper {
-    //TODO: 右寄せにしたい
     display: flex;
     align-items: center;
-    // margin-right: 0;
+    margin-right: 20px;
     .logOutButton {
       min-width: 30px;
       padding: 5px 10px 5px 10px;
