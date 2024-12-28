@@ -26,7 +26,7 @@ axios.interceptors.request.use(
   }
 );
 
-// リクエスト インターセプターを追加します
+// response intercepter
 axios.interceptors.response.use(
   (response) => response,
   (error) => {
