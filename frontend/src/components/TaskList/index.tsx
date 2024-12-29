@@ -1,28 +1,21 @@
 import { Task } from "@/types/task";
 import styles from "./styles.module.scss";
-import { TaskStatus } from "@/types/taskStatus";
-import { useState } from "react";
+import { TaskStatus, getTaskStatusName } from "@/types/taskStatus";
 
 type Props = {
   status: TaskStatus;
   tasks?: Task[];
+  openModal: (selectedTask: Task) => void;
 };
 
-export const TaskList = ({ status, tasks }: Props) => {
-  const [selectedTask, setSelectedTask] = useState<Task | null>();
-
-  const openModal = (task: Task) => {
-    setSelectedTask(task);
-  };
-
-  const closeModal = () => {
-    setSelectedTask(null);
-  };
+export const TaskList = ({ status, tasks, openModal }: Props) => {
+  const statusName: string = getTaskStatusName(status);
 
   return (
-    <article className={styles.taskContainer}>
-      <span className={styles.status}>{status}</span>
-      {/* //TODO:onClickでモーダル出す */}
+    <div className={styles.taskContainer}>
+      <div className={`${styles.statusWrapper} ${styles[statusName]}`}>
+        <span className={styles.status}>{status}</span>
+      </div>
       <ul className={styles.taskList}>
         {tasks &&
           tasks.map((task) => (
@@ -31,6 +24,6 @@ export const TaskList = ({ status, tasks }: Props) => {
             </li>
           ))}
       </ul>
-    </article>
+    </div>
   );
 };

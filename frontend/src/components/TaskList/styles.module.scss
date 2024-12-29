@@ -10,21 +10,37 @@
   background-color: rgb(120, 120, 120);
   border-radius: 5px;
 
-  .status {
-    font-size: large;
-    top: 0;
-    font-weight: bold;
-    padding: 30px 50px 20px 50px;
-    border-bottom: 2px solid rgb(75, 75, 75);
+  .statusWrapper {
+    width: 100%;
+    padding: 30px 0 20px 0;
+    display: flex;
+    justify-content: center;
+
+    .status {
+      font-size: large;
+      font-weight: bold;
+    }
+  }
+
+  .notStarted {
+    background-color: rgb(108, 50, 50);
+  }
+  .inProgress {
+    background-color: rgb(53, 134, 85);
+  }
+  .finished {
+    background-color: rgb(78, 112, 171);
   }
 
   .task {
     list-style: none;
     padding: 15px 50px 10px 50px;
     border-radius: 5px;
+    border-bottom: 1px solid rgb(50, 50, 50);
   }
   .task:hover {
     cursor: pointer;
     background-color: darkgray;
+    transition: 0.3s;
   }
 }
