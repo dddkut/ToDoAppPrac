@@ -1,0 +1,67 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+}
+.modalContent {
+  background-color: rgb(145, 145, 145);
+  border-radius: 5px;
+  max-width: 500px;
+  width: 80%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin: 70px 0 70px 0;
+  font-size: 20px;
+  animation: fade-in-right 0.5s forwards;
+  .taskTitle {
+    padding: 20px 20px 5px 20px;
+    margin-bottom: 15px;
+    animation: fade-in-top 0.5s forwards;
+  }
+  .contentWrapper {
+    padding: 0 20px 20px 20px;
+    .contentTitle {
+      border-bottom: 1px solid black;
+      color: rgb(70, 70, 70);
+    }
+    .taskContent {
+      padding-top: 8px;
+      font-weight: bold;
+    }
+  }
+
+  @keyframes fade-in-top {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(-150px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.notStarted {
+  background-color: rgb(108, 50, 50);
+}
+.inProgress {
+  background-color: rgb(53, 134, 85);
+}
+.finished {
+  background-color: rgb(78, 112, 171);
+}
