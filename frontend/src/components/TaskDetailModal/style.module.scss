@@ -20,9 +20,9 @@
   .taskTitle {
     padding: 20px 20px 5px 20px;
     margin-bottom: 15px;
-    animation: fade-in-top 0.5s forwards;
   }
   .contentWrapper {
+    animation: fade-in-top 0.5s forwards;
     padding: 0 20px 20px 20px;
     .contentTitle {
       border-bottom: 1px solid black;
@@ -37,13 +37,14 @@
   @keyframes fade-in-top {
     0% {
       opacity: 0;
-      transform: translateY(-100px);
+      transform: translateY(-30px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
+
   @keyframes fade-in-right {
     0% {
       opacity: 0;
@@ -51,7 +52,7 @@
     }
     100% {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
     }
   }
 }

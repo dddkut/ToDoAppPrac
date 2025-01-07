@@ -21,6 +21,7 @@ export class TaskService {
       .where('userId', '==', userId)
       .get();
 
+    console.log(snapshot);
     if (snapshot.empty) {
       return [];
     }
