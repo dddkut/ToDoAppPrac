@@ -13,11 +13,12 @@ const axiosInstance = axios.create({
 // request intercepter
 axios.interceptors.request.use(
   async (config) => {
+    console.log("cccccccccccccccc!!!!!!!!!!!!!!!!!!!!");
     const user = auth.currentUser;
     if (user) {
-      const token = await user.getIdToken(true); // get latest tolken
+      const token = await user.getIdToken(true); // getting latest token
       config.headers["Authorization"] = `Bearer ${token}`;
-      localStorage.setItem("token", token); // saving token in local storage
+      localStorage.setItem("token", token); // saving token to local storage
     }
     return config;
   },
