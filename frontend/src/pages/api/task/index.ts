@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { useAppSelector } from "@/hooks";
 import axios from "axios";
 
 const NEST_API_BASE_URL =
@@ -9,7 +10,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // res.status(200).json({ name: "John Doe" });
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
+  const token = useAppSelector((state) => state.signIn.token);
 
   console.log("bbbbbbbbbbbbbbbbb!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   try {
