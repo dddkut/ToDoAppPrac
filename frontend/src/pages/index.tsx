@@ -22,8 +22,10 @@ export default function Home() {
       console.log("logged in successfully");
 
       // redirect to top screen
-      void router.replace("/top");
-    } catch (error) {}
+      await router.replace("/top");
+    } catch (error) {
+      console.error("An Error occured on sign in", error);
+    }
   };
 
   return (
