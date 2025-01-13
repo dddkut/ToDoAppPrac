@@ -1,11 +1,10 @@
 import axios from "axios";
 import { auth } from "./firebase";
-
-//TODO: .envから取得するようにする
-// const baseURL = process.env.API_BASE_URL
+import { onAuthStateChanged } from "firebase/auth";
 
 //activated on server side if api is called from getServerSedeProps
 const axiosClient = axios.create({
+  //TODO: .envから取得するようにする
   // baseURL:baseURL,
   baseURL: "http://localhost:3001",
   timeout: 1000,
@@ -14,13 +13,25 @@ const axiosClient = axios.create({
 // request intercepter
 axiosClient.interceptors.request.use(
   async (config) => {
-    const user = auth.currentUser;
+    const waitForUser = () => {
+      return new Promise((resolve) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          unsubscribe(); //unsubscribe listener for onAuthStateChanged()
+          resolve(user);
+        });
+      });
+    };
+
+    let user = auth.currentUser;
+    if (!user) {
+      //wait for auth.currentUser
+      user = await waitForUser();
+    }
     console.log("user:", user);
+
     if (user) {
       const token = await user.getIdToken(true); // getting latest token
       config.headers["Authorization"] = `Bearer ${token}`;
-      console.log(token);
-      // localStorage.setItem("token", token); // saving token to local storage
     }
     return config;
   },
