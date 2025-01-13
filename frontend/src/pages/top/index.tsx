@@ -38,15 +38,12 @@ export default function Top() {
   useEffect(() => {
     if (tasks && tasks.length > 0) {
       console.log("tasks", tasks);
-      // const notStarted = dummyTasks.filter(
       const notStarted = tasks.filter(
         (task) => task.status === taskStatus.notStarted
       );
-      // const inProgress = dummyTasks.filter(
       const inProgress = tasks.filter(
         (task) => task.status === taskStatus.inProgress
       );
-      // const finished = dummyTasks.filter(
       const finished = tasks.filter(
         (task) => task.status === taskStatus.finished
       );
@@ -55,6 +52,24 @@ export default function Top() {
       setFinishedTasks(finished);
     }
   }, tasks);
+
+  // useEffect(() => {
+  //   if (dummyTasks && dummyTasks.length > 0) {
+  //     console.log("tasks", tasks);
+  //     const notStarted = dummyTasks.filter(
+  //       (task) => task.status === taskStatus.notStarted
+  //     );
+  //     const inProgress = dummyTasks.filter(
+  //       (task) => task.status === taskStatus.inProgress
+  //     );
+  //     const finished = dummyTasks.filter(
+  //       (task) => task.status === taskStatus.finished
+  //     );
+  //     setNotStartedTasks(notStarted);
+  //     setInProgressTasks(inProgress);
+  //     setFinishedTasks(finished);
+  //   }
+  // }, []);
 
   const openModal = (task: Task) => {
     setSelectedTask(task);

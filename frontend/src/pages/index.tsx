@@ -17,8 +17,7 @@ export default function Home() {
     try {
       const loginResult = await signInWithPopup(auth, provider);
       const idToken = await loginResult.user.getIdToken();
-      dispatch(handleSignedIn(idToken));
-      console.log(idToken);
+      dispatch(handleSignedIn(idToken)); //TODO:後で消す
       console.log("logged in successfully");
 
       // redirect to top screen
