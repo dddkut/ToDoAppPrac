@@ -1,6 +1,7 @@
+//TODO: 後で消す
+//not used
 import type { NextApiRequest, NextApiResponse } from "next";
-import { useAppSelector } from "@/hooks";
-import axios from "axios";
+import axiosClient from "../../../utils/axios.config";
 
 const NEST_API_BASE_URL =
   process.env.NEST_API_BASE_URL || "http://localhost:3001";
@@ -11,19 +12,13 @@ export default async function handler(
 ) {
   // res.status(200).json({ name: "John Doe" });
   // const token = localStorage.getItem("token");
-  const token = useAppSelector((state) => state.signIn.token);
 
   console.log("bbbbbbbbbbbbbbbbb!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   try {
     if (req.method === "GET") {
       //accessing to backend
       // const response = await axios.get(`${NEST_API_BASE_URL}/task`);
-      const response = await axios.get(`${NEST_API_BASE_URL}/task`, {
-        //TODO:tokenを追加する
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axiosClient.get(`${NEST_API_BASE_URL}/task`);
       return res.status(200).json(response.data);
     }
   } catch (error: any) {

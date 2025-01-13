@@ -4,21 +4,23 @@ import { auth } from "./firebase";
 //TODO: .envから取得するようにする
 // const baseURL = process.env.API_BASE_URL
 
-const axiosInstance = axios.create({
+//activated on server side if api is called from getServerSedeProps
+const axiosClient = axios.create({
   // baseURL:baseURL,
   baseURL: "http://localhost:3001",
   timeout: 1000,
 });
 
 // request intercepter
-axios.interceptors.request.use(
+axiosClient.interceptors.request.use(
   async (config) => {
-    console.log("cccccccccccccccc!!!!!!!!!!!!!!!!!!!!");
     const user = auth.currentUser;
+    console.log("user:", user);
     if (user) {
       const token = await user.getIdToken(true); // getting latest token
       config.headers["Authorization"] = `Bearer ${token}`;
-      localStorage.setItem("token", token); // saving token to local storage
+      console.log(token);
+      // localStorage.setItem("token", token); // saving token to local storage
     }
     return config;
   },
@@ -28,7 +30,7 @@ axios.interceptors.request.use(
 );
 
 // response intercepter
-axios.interceptors.response.use(
+axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
@@ -40,4 +42,4 @@ axios.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export default axiosClient;

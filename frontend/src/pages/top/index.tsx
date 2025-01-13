@@ -5,30 +5,56 @@ import styles from "./styles.module.scss";
 import { Task } from "@/types/task";
 import { TaskList } from "@/components/TaskList";
 import { taskStatus } from "@/constants/taskStatus";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskDetailModal } from "@/components/TaskDetailModal";
+import axiosClient from "@/utils/axios.config";
+// import { dummyTasks } from "@/constants/dummy/dummyTasks"; //TODO:バックエンドから取得する
 
-import { dummyTasks } from "@/constants/dummy/dummyTasks"; //TODO:バックエンドから取得する
-
-type Props = {
-  tasks: Task[];
-};
-
-export default function Top({ tasks }: Props) {
+export default function Top() {
   const [selectedTask, setSelectedTask] = useState<Task | null>();
-  console.log(tasks);
-  // const notStartedTasks = dummyTasks.filter(
-  const notStartedTasks = tasks.filter(
-    (task) => task.status === taskStatus.notStarted
-  );
-  // const inProgressTasks = dummyTasks.filter(
-  const inProgressTasks = tasks.filter(
-    (task) => task.status === taskStatus.inProgress
-  );
-  // const finishedTasks = dummyTasks.filter(
-  const finishedTasks = tasks.filter(
-    (task) => task.status === taskStatus.finished
-  );
+  const [tasks, setTasks] = useState<Task[] | []>();
+  const [notStartedTasks, setNotStartedTasks] = useState<Task[] | []>();
+  const [inProgressTasks, setInProgressTasks] = useState<Task[] | []>();
+  const [finishedTasks, setFinishedTasks] = useState<Task[] | []>();
+
+  const NEST_API_BASE_URL =
+    process.env.NEST_API_BASE_URL || "http://localhost:3001"; //TODO:変更する
+
+  useEffect(() => {
+    const fetchInitialTasks = async () => {
+      try {
+        const response = await axiosClient.get(`${NEST_API_BASE_URL}/task`);
+        const data = response.data ?? [];
+
+        setTasks(data);
+      } catch (error) {
+        console.error("Error on fetching tasks", error);
+      }
+    };
+
+    fetchInitialTasks();
+  }, []);
+
+  useEffect(() => {
+    if (tasks && tasks.length > 0) {
+      console.log("tasks", tasks);
+      // const notStarted = dummyTasks.filter(
+      const notStarted = tasks.filter(
+        (task) => task.status === taskStatus.notStarted
+      );
+      // const inProgress = dummyTasks.filter(
+      const inProgress = tasks.filter(
+        (task) => task.status === taskStatus.inProgress
+      );
+      // const finished = dummyTasks.filter(
+      const finished = tasks.filter(
+        (task) => task.status === taskStatus.finished
+      );
+      setNotStartedTasks(notStarted);
+      setInProgressTasks(inProgress);
+      setFinishedTasks(finished);
+    }
+  }, tasks);
 
   const openModal = (task: Task) => {
     setSelectedTask(task);
@@ -69,23 +95,3 @@ export default function Top({ tasks }: Props) {
     </Layout>
   );
 }
-export const getServerSideProps: GetServerSideProps = async () => {
-  const TASK_API_BASE_URL = "http://localhost:3000/api/task"; //TODO:変更する
-  try {
-    console.log("aaaaaaaaaa!!!!!!!!!!!!!!!!!!!");
-    const data = await axios.get(`${TASK_API_BASE_URL}`);
-    console.log(data);
-
-    return {
-      props: {
-        tasks: data,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        tasks: [],
-      },
-    };
-  }
-};
