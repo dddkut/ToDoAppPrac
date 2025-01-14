@@ -1,7 +1,7 @@
 export type SideBarMenu = "SideBarMenu1" | "SideBarMenu2" | "SideBarMenu3";
 
 export type SideBarItem = {
-  name: SideBarMenu;
+  name: string;
   path: string;
-  icon: string;
+  Icon: React.ComponentType;
 };
