@@ -1,19 +1,21 @@
 import { SideBarItem } from "@/types/sideBarMenu";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 export const sideBarItems: SideBarItem[] = [
   {
-    name: "SideBarMenu1",
+    name: "Add a Task",
     path: "",
-    icon: "",
+    Icon: ControlPointIcon,
   },
   {
-    name: "SideBarMenu2",
+    name: "Edit a task",
     path: "",
-    icon: "",
+    Icon: ModeEditIcon,
   },
-  {
-    name: "SideBarMenu3",
-    path: "",
-    icon: "",
-  },
+  // {
+  //   name: "SideBarMenu3",
+  //   path: "",
+  //   icon: ,
+  // },
 ];

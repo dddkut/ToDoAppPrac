@@ -1,0 +1,16 @@
+.sideBarItem {
+  height: 70px;
+  padding: 15px 15px 15px 15px;
+
+  .itemIcon {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.sideBarItem:hover {
+  background-color: gray;
+}
+.hrLine {
+  margin-top: 5px;
+}
