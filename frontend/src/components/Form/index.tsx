@@ -18,6 +18,7 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
         <input
           type="text"
           id="title"
+          className={styles.input}
           defaultValue={defaultValues.title}
           {...register("title", { required: "Title is required" })}
         />
@@ -26,6 +27,7 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
         <span className={styles.contentTitle}>STATUS</span>
         <select
           id="status"
+          className={styles.input}
           defaultValue={defaultValues.status}
           {...register("status", { required: "Status is required" })}
         >
@@ -38,6 +40,7 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
         <span className={styles.contentTitle}>DESCRIPTION</span>
         <textarea
           id="description"
+          className={styles.textBox}
           defaultValue={defaultValues.description}
           {...register("description")}
         />
@@ -47,6 +50,7 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
         <input
           type="datetime-local"
           id="due"
+          className={styles.input}
           defaultValue={defaultValues.due}
           {...register("due")}
         />
@@ -56,6 +60,7 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
         <input
           type="text"
           id="inCharge"
+          className={styles.input}
           defaultValue={defaultValues.inCharge}
           {...register("inCharge")}
         />
@@ -63,14 +68,22 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
       <div className={styles.contentWrapper}>
         <span className={styles.contentTitle}>PRIORITY</span>
         {/* <select name="priority" defaultValue={priority.Middle}> */}
-        <select id="priority" {...register("priority")}>
+        <select
+          id="priority"
+          className={styles.input}
+          {...register("priority")}
+        >
           <option value={""}>select</option>
           <option value={priority.High}>{priority.High}</option>
           <option value={priority.Middle}>{priority.Middle}</option>
           <option value={priority.Low}>{priority.Low}</option>
         </select>
       </div>
-      <button type="submit">Submit</button>
+      <div className={styles.contentWrapper}>
+        <button className={styles.input} type="submit">
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

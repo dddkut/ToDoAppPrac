@@ -1,9 +1,17 @@
 .contentWrapper {
   // animation: fade-in-top 0.5s forwards;
   padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
   .contentTitle {
     border-bottom: 1px solid black;
     color: rgb(70, 70, 70);
+  }
+  .input {
+    height: 30px;
+  }
+  .textBox {
+    height: 75px;
   }
   //   .taskContent {
   //     padding-top: 8px;
