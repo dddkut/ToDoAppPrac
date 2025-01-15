@@ -16,14 +16,14 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   margin: 70px 0 70px 0;
   font-size: 20px;
-  animation: fade-in-right 0.5s forwards;
+  animation: fade-in-right 0.5s forwards; //TODO:消える時のアニメーションを追加する
   .taskTitle {
     padding: 20px 20px 5px 20px;
     margin-bottom: 15px;
     border-radius: 5px 5px 0 0;
   }
   .contentWrapper {
-    animation: fade-in-top 0.5s forwards;
+    // animation: fade-in-top 0.5s forwards;
     padding: 0 20px 20px 20px;
     .contentTitle {
       border-bottom: 1px solid black;
@@ -35,21 +35,21 @@
     }
   }
 
-  @keyframes fade-in-top {
-    0% {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  // @keyframes fade-in-top {
+  //   0% {
+  //     opacity: 0;
+  //     transform: translateY(-30px);
+  //   }
+  //   100% {
+  //     opacity: 1;
+  //     transform: translateY(0);
+  //   }
+  // }
 
   @keyframes fade-in-right {
     0% {
       opacity: 0;
-      transform: translateX(-150px);
+      transform: translateX(-50px);
     }
     100% {
       opacity: 1;
