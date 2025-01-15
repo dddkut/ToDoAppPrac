@@ -80,7 +80,7 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
         </select>
       </div>
       <div className={styles.contentWrapper}>
-        <button className={styles.input} type="submit">
+        <button className={styles.submitButton} type="submit">
           Submit
         </button>
       </div>
