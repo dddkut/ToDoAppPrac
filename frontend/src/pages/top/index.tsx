@@ -1,5 +1,5 @@
-import { GetServerSideProps } from "next";
-import axios from "axios";
+// import { GetServerSideProps } from "next";
+// import axios from "axios";
 import { Layout } from "@/components/Layout";
 import styles from "./styles.module.scss";
 import { Task } from "@/types/task";
@@ -8,9 +8,16 @@ import { taskStatus } from "@/constants/taskStatus";
 import { useEffect, useState } from "react";
 import { TaskDetailModal } from "@/components/TaskDetailModal";
 import axiosClient from "@/utils/axios.config";
-// import { dummyTasks } from "@/constants/dummy/dummyTasks"; //TODO:バックエンドから取得する
+import { dummyTasks } from "@/constants/dummy/dummyTasks"; //TODO:バックエンドから取得する
+import { useAppSelector, useAppDispatch } from "@/hooks";
+import { switchRegisterModal } from "@/features/sideBar/sideBarSlice";
+import { RegisterTasklModal } from "@/components/RegisterTaskModal";
 
 export default function Top() {
+  const dispatch = useAppDispatch();
+  const isRegisterModal = useAppSelector(
+    (state) => state.SideBar.isRegisterModal
+  );
   const [selectedTask, setSelectedTask] = useState<Task | null>();
   const [tasks, setTasks] = useState<Task[] | []>();
   const [notStartedTasks, setNotStartedTasks] = useState<Task[] | []>();
@@ -35,47 +42,47 @@ export default function Top() {
     fetchInitialTasks();
   }, []);
 
-  useEffect(() => {
-    if (tasks && tasks.length > 0) {
-      console.log("tasks", tasks);
-      const notStarted = tasks.filter(
-        (task) => task.status === taskStatus.notStarted
-      );
-      const inProgress = tasks.filter(
-        (task) => task.status === taskStatus.inProgress
-      );
-      const finished = tasks.filter(
-        (task) => task.status === taskStatus.finished
-      );
-      setNotStartedTasks(notStarted);
-      setInProgressTasks(inProgress);
-      setFinishedTasks(finished);
-    }
-  }, tasks);
-
   // useEffect(() => {
-  //   if (dummyTasks && dummyTasks.length > 0) {
+  //   if (tasks && tasks.length > 0) {
   //     console.log("tasks", tasks);
-  //     const notStarted = dummyTasks.filter(
+  //     const notStarted = tasks.filter(
   //       (task) => task.status === taskStatus.notStarted
   //     );
-  //     const inProgress = dummyTasks.filter(
+  //     const inProgress = tasks.filter(
   //       (task) => task.status === taskStatus.inProgress
   //     );
-  //     const finished = dummyTasks.filter(
+  //     const finished = tasks.filter(
   //       (task) => task.status === taskStatus.finished
   //     );
   //     setNotStartedTasks(notStarted);
   //     setInProgressTasks(inProgress);
   //     setFinishedTasks(finished);
   //   }
-  // }, []);
+  // }, tasks);
 
-  const openModal = (task: Task) => {
+  useEffect(() => {
+    if (dummyTasks && dummyTasks.length > 0) {
+      console.log("tasks", tasks);
+      const notStarted = dummyTasks.filter(
+        (task) => task.status === taskStatus.notStarted
+      );
+      const inProgress = dummyTasks.filter(
+        (task) => task.status === taskStatus.inProgress
+      );
+      const finished = dummyTasks.filter(
+        (task) => task.status === taskStatus.finished
+      );
+      setNotStartedTasks(notStarted);
+      setInProgressTasks(inProgress);
+      setFinishedTasks(finished);
+    }
+  }, []);
+
+  const openTaskDetailModal = (task: Task) => {
     setSelectedTask(task);
   };
 
-  const closeModal = () => {
+  const closeTaskDetailModal = () => {
     setSelectedTask(null);
   };
 
@@ -86,26 +93,34 @@ export default function Top() {
           <TaskList
             status={taskStatus.notStarted}
             tasks={notStartedTasks}
-            openModal={openModal}
+            openModal={openTaskDetailModal}
           />
         </article>
         <article className={styles.listContents}>
           <TaskList
             status={taskStatus.inProgress}
             tasks={inProgressTasks}
-            openModal={openModal}
+            openModal={openTaskDetailModal}
           />
         </article>
         <article className={styles.listContents}>
           <TaskList
             status={taskStatus.finished}
             tasks={finishedTasks}
-            openModal={openModal}
+            openModal={openTaskDetailModal}
           />
         </article>
       </div>
       {selectedTask && (
-        <TaskDetailModal task={selectedTask} closeModal={closeModal} />
+        <TaskDetailModal
+          task={selectedTask}
+          closeModal={closeTaskDetailModal}
+        />
+      )}
+      {isRegisterModal && (
+        <RegisterTasklModal
+          closeModal={() => dispatch(switchRegisterModal())}
+        />
       )}
     </Layout>
   );
