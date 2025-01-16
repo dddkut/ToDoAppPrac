@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./styles.module.scss";
-// import { SideBarItem } from "@/types/sideBarMenu";
 
 type Props = {
   Icon: React.ComponentType;

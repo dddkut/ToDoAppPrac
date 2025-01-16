@@ -4,7 +4,7 @@ import sideBarReducer from "./features/sideBar/sideBarSlice";
 
 export const store = configureStore({
   reducer: {
-    signIn: signInReducer,
+    SignIn: signInReducer,
     SideBar: sideBarReducer,
   },
   devTools: true,

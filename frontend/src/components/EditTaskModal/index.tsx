@@ -5,6 +5,7 @@ import { Task } from "@/types/task";
 import axiosClient from "@/utils/axios.config";
 
 type Props = {
+  task: Task;
   closeModal: () => void;
   fetchTasks: () => void;
 };
@@ -12,12 +13,15 @@ type Props = {
 const NEST_API_BASE_URL =
   process.env.NEST_API_BASE_URL || "http://localhost:3001"; //TODO:変更する
 
-export const RegisterTasklModal = ({ closeModal, fetchTasks }: Props) => {
+export const EditTasklModal = ({ task, closeModal, fetchTasks }: Props) => {
   const { register, handleSubmit } = useForm<Task>();
 
   const onSubmit: SubmitHandler<Task> = async (data: Task) => {
     try {
-      const result = await axiosClient.post(`${NEST_API_BASE_URL}/task`, data);
+      const result = await axiosClient.patch(
+        `${NEST_API_BASE_URL}/task/${data.id}`,
+        data
+      );
       fetchTasks();
       closeModal();
       //TODO: 完了時のお知らせを出す
@@ -27,12 +31,12 @@ export const RegisterTasklModal = ({ closeModal, fetchTasks }: Props) => {
   };
 
   const defaultValues: Task = {
-    title: "",
-    status: "Not Started",
-    description: "",
-    // due: "",
-    inCharge: "",
-    priority: "Low",
+    title: task.id ?? "",
+    status: task.status,
+    description: task.description ?? "",
+    due: task.due,
+    inCharge: task.inCharge ?? "",
+    priority: task.priority ?? undefined,
   };
 
   return (

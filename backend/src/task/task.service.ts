@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto, UpdateTaskDto } from 'src/dto/task.dto';
 import { Task } from 'src/entity/task.entity';
 import { FirebaseService } from 'src/firebase/firebase.service';
-import { v4 as uuid } from 'uuid';
 import * as admin from 'firebase-admin';
 
 @Injectable()
@@ -47,7 +46,7 @@ export class TaskService {
     createTaskDto: CreateTaskDto,
   ): Promise<Task> {
     const task = {
-      id: uuid,
+      // id: uuid,
       status: 'Not Started',
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime(),

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 // import { useState } from "react";
 import { auth, provider, signInWithPopup } from "../utils/firebase";
-// import { User } from "firebase/auth";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { handleSignedIn } from "../features/signIn/signInSlice";
 import styles from "./styles.module.scss";

@@ -1,10 +1,12 @@
 import { Task } from "@/types/task";
 import styles from "./style.module.scss";
 import { getTaskStatusName } from "@/types/taskStatus";
+import { switchEditModal } from "@/features/sideBar/sideBarSlice";
 
 type Props = {
   task: Task;
   closeModal: () => void;
+  switchEditModal: () => void;
 };
 
 export const TaskDetailModal = ({ task, closeModal }: Props) => {
@@ -16,6 +18,12 @@ export const TaskDetailModal = ({ task, closeModal }: Props) => {
         <h2 className={`${styles.taskTitle} ${styles[statusName]}`}>
           {task.title}
         </h2>
+        <button
+          className={styles.contentWrapper}
+          onClick={() => switchEditModal()}
+        >
+          edit
+        </button>
         <div className={styles.contentWrapper}>
           <span className={styles.contentTitle}>STATUS</span>
           <p className={styles.taskContent}>{task.status}</p>

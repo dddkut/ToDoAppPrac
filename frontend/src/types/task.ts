@@ -1,5 +1,6 @@
 import { Priority } from "./priority";
 import { TaskStatus } from "./taskStatus";
+
 export type Task = {
   id?: string;
   title: string;

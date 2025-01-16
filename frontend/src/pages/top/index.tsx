@@ -1,5 +1,3 @@
-// import { GetServerSideProps } from "next";
-// import axios from "axios";
 import { Layout } from "@/components/Layout";
 import styles from "./styles.module.scss";
 import { Task } from "@/types/task";
@@ -8,16 +6,20 @@ import { taskStatus } from "@/constants/taskStatus";
 import { useEffect, useState } from "react";
 import { TaskDetailModal } from "@/components/TaskDetailModal";
 import axiosClient from "@/utils/axios.config";
-import { dummyTasks } from "@/constants/dummy/dummyTasks"; //TODO:バックエンドから取得する
 import { useAppSelector, useAppDispatch } from "@/hooks";
-import { switchRegisterModal } from "@/features/sideBar/sideBarSlice";
+import {
+  switchRegisterModal,
+  switchEditModal,
+} from "@/features/sideBar/sideBarSlice";
 import { RegisterTasklModal } from "@/components/RegisterTaskModal";
+import { EditTasklModal } from "@/components/EditTaskModal";
 
 export default function Top() {
   const dispatch = useAppDispatch();
   const isRegisterModal = useAppSelector(
     (state) => state.SideBar.isRegisterModal
   );
+  const isEditModal = useAppSelector((state) => state.SideBar.isEditModal);
   const [selectedTask, setSelectedTask] = useState<Task | null>();
   const [tasks, setTasks] = useState<Task[] | []>();
   const [notStartedTasks, setNotStartedTasks] = useState<Task[] | []>();
@@ -27,56 +29,37 @@ export default function Top() {
   const NEST_API_BASE_URL =
     process.env.NEST_API_BASE_URL || "http://localhost:3001"; //TODO:変更する
 
+  const fetchTasks = async () => {
+    try {
+      const response = await axiosClient.get(`${NEST_API_BASE_URL}/task`);
+      const data = response.data ?? [];
+
+      setTasks(data);
+    } catch (error) {
+      console.error("Error on fetching tasks", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchInitialTasks = async () => {
-      try {
-        const response = await axiosClient.get(`${NEST_API_BASE_URL}/task`);
-        const data = response.data ?? [];
-
-        setTasks(data);
-      } catch (error) {
-        console.error("Error on fetching tasks", error);
-      }
-    };
-
-    fetchInitialTasks();
+    fetchTasks();
   }, []);
 
-  // useEffect(() => {
-  //   if (tasks && tasks.length > 0) {
-  //     console.log("tasks", tasks);
-  //     const notStarted = tasks.filter(
-  //       (task) => task.status === taskStatus.notStarted
-  //     );
-  //     const inProgress = tasks.filter(
-  //       (task) => task.status === taskStatus.inProgress
-  //     );
-  //     const finished = tasks.filter(
-  //       (task) => task.status === taskStatus.finished
-  //     );
-  //     setNotStartedTasks(notStarted);
-  //     setInProgressTasks(inProgress);
-  //     setFinishedTasks(finished);
-  //   }
-  // }, tasks);
-
   useEffect(() => {
-    if (dummyTasks && dummyTasks.length > 0) {
-      console.log("tasks", tasks);
-      const notStarted = dummyTasks.filter(
+    if (tasks && tasks.length > 0) {
+      const notStarted = tasks.filter(
         (task) => task.status === taskStatus.notStarted
       );
-      const inProgress = dummyTasks.filter(
+      const inProgress = tasks.filter(
         (task) => task.status === taskStatus.inProgress
       );
-      const finished = dummyTasks.filter(
+      const finished = tasks.filter(
         (task) => task.status === taskStatus.finished
       );
       setNotStartedTasks(notStarted);
       setInProgressTasks(inProgress);
       setFinishedTasks(finished);
     }
-  }, []);
+  }, tasks);
 
   const openTaskDetailModal = (task: Task) => {
     setSelectedTask(task);
@@ -115,11 +98,20 @@ export default function Top() {
         <TaskDetailModal
           task={selectedTask}
           closeModal={closeTaskDetailModal}
+          switchEditModal={switchEditModal}
         />
       )}
       {isRegisterModal && (
         <RegisterTasklModal
           closeModal={() => dispatch(switchRegisterModal())}
+          fetchTasks={() => fetchTasks()}
+        />
+      )}
+      {isEditModal && selectedTask && (
+        <EditTasklModal
+          task={selectedTask}
+          closeModal={() => dispatch(switchEditModal())}
+          fetchTasks={() => fetchTasks()}
         />
       )}
     </Layout>
