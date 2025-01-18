@@ -21,6 +21,14 @@
     padding: 20px 20px 5px 20px;
     margin-bottom: 15px;
     border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: space-between;
+    .editButton {
+      padding: 0 10px 0 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      border: none;
+    }
   }
   .contentWrapper {
     // animation: fade-in-top 0.5s forwards;

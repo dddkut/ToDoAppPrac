@@ -20,7 +20,6 @@ export class TaskController {
 
   @Post()
   createTask(@Req() req, @Body() createTaskDto: CreateTaskDto) {
-    console.log('controller');
     const userId = req.user.uid; // Firebase Authentication uid
     return this.taskService.createTask(userId, createTaskDto);
   }
