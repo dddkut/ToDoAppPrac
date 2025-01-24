@@ -16,6 +16,12 @@ export const Form = ({ handleSubmit, defaultValues, register }: Props) => {
       <div className={styles.contentWrapper}>
         <span className={styles.contentTitle}>TITLE</span>
         <input
+          value={defaultValues.id}
+          id="id"
+          className={styles.id}
+          {...register("id")}
+        />
+        <input
           type="text"
           id="title"
           className={styles.input}

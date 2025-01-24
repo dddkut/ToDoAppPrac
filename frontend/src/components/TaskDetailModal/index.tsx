@@ -8,17 +8,16 @@ import { useAppSelector, useAppDispatch } from "@/hooks";
 type Props = {
   task: Task;
   closeModal: () => void;
-  // switchEditModal: () => void;
+  fetchTasks: () => void;
 };
 
-export const TaskDetailModal = ({
-  task,
-  closeModal,
-}: // switchEditModal,
-Props) => {
+export const TaskDetailModal = ({ task, closeModal, fetchTasks }: Props) => {
   const dispatch = useAppDispatch();
   const statusName: string = getTaskStatusName(task.status);
   const isEditModal = useAppSelector((state) => state.SideBar.isEditModal);
+  const closeEditModal = () => {
+    closeModal();
+  };
 
   return (
     <div className={styles.modalOverlay} onClick={closeModal}>
@@ -68,8 +67,8 @@ Props) => {
       ) : (
         <EditTasklModal
           task={task}
-          closeModal={() => dispatch(switchEditModal())}
-          // fetchTasks={() => fetchTasks()}
+          closeModal={() => closeEditModal()}
+          fetchTasks={() => fetchTasks()}
         />
       )}
     </div>

@@ -3,16 +3,20 @@ import { Form } from "../Form";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Task } from "@/types/task";
 import axiosClient from "@/utils/axios.config";
+import { switchEditModal } from "@/features/sideBar/sideBarSlice";
+import { useAppDispatch } from "@/hooks";
 
 type Props = {
   task: Task;
   closeModal: () => void;
+  fetchTasks: () => void;
 };
 
 const NEST_API_BASE_URL =
   process.env.NEST_API_BASE_URL || "http://localhost:3001"; //TODO:変更する
 
-export const EditTasklModal = ({ task, closeModal }: Props) => {
+export const EditTasklModal = ({ task, closeModal, fetchTasks }: Props) => {
+  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<Task>();
 
   const onSubmit: SubmitHandler<Task> = async (data: Task) => {
@@ -22,6 +26,7 @@ export const EditTasklModal = ({ task, closeModal }: Props) => {
         data
       );
       closeModal();
+      fetchTasks();
       //TODO: 完了時のお知らせを出す
     } catch (error) {
       console.error("Error on task registeration", error);
@@ -29,6 +34,7 @@ export const EditTasklModal = ({ task, closeModal }: Props) => {
   };
 
   const defaultValues: Task = {
+    id: task.id,
     title: task.title ?? "",
     status: task.status,
     description: task.description ?? "",
@@ -46,6 +52,12 @@ export const EditTasklModal = ({ task, closeModal }: Props) => {
           defaultValues={defaultValues}
           register={register}
         />
+        <button
+          className={styles.cancelButton}
+          onClick={() => dispatch(switchEditModal())}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

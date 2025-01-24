@@ -12,14 +12,12 @@ import {
   switchEditModal,
 } from "@/features/sideBar/sideBarSlice";
 import { RegisterTasklModal } from "@/components/RegisterTaskModal";
-// import { EditTasklModal } from "@/components/EditTaskModal";
 
 export default function Top() {
   const dispatch = useAppDispatch();
   const isRegisterModal = useAppSelector(
     (state) => state.SideBar.isRegisterModal
   );
-  // const isEditModal = useAppSelector((state) => state.SideBar.isEditModal);
   const [selectedTask, setSelectedTask] = useState<Task | null>();
   const [tasks, setTasks] = useState<Task[] | []>();
   const [notStartedTasks, setNotStartedTasks] = useState<Task[] | []>();
@@ -98,7 +96,7 @@ export default function Top() {
         <TaskDetailModal
           task={selectedTask}
           closeModal={closeTaskDetailModal}
-          // switchEditModal={switchEditModal}
+          fetchTasks={() => fetchTasks()}
         />
       )}
       {isRegisterModal && (
@@ -107,13 +105,6 @@ export default function Top() {
           fetchTasks={() => fetchTasks()}
         />
       )}
-      {/* {isEditModal && selectedTask && (
-        <EditTasklModal
-          task={selectedTask}
-          closeModal={() => dispatch(switchEditModal())}
-          fetchTasks={() => fetchTasks()}
-        />
-      )} */}
     </Layout>
   );
 }
