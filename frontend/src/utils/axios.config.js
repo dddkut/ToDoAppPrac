@@ -27,7 +27,6 @@ axiosClient.interceptors.request.use(
       //wait for auth.currentUser
       user = await waitForUser();
     }
-    console.log("user:", user);
 
     if (user) {
       const token = await user.getIdToken(true); // getting latest token

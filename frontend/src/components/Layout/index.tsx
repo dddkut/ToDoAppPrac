@@ -21,7 +21,6 @@ export const Layout = ({ children }: Props) => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // setUser(null);  //TODO:reduxで管理する
       localStorage.removeItem("token");
       console.log("logged out");
       // redirect to sign in screen

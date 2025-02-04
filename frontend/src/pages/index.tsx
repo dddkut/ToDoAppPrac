@@ -7,9 +7,6 @@ import styles from "./styles.module.scss";
 
 export default function Home() {
   const router = useRouter();
-  // const [user, setUser] = useState<User>(); //TODO: reduxで管理する
-  // const isSignedIn = useAppSelector((state) => state.signIn.isSignedIn);
-  // const token = useAppSelector((state) => state.signIn.token);
   const dispatch = useAppDispatch();
 
   const logInWithGoogle = async () => {
